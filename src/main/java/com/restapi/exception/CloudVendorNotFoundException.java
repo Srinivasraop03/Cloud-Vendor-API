@@ -1,4 +1,4 @@
-package com.thinkconstructive.restdemo.exception;
+package com.restapi.exception;
 
 public class CloudVendorNotFoundException extends RuntimeException {
 

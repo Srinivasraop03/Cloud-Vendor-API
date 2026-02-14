@@ -1,4 +1,4 @@
-package com.thinkconstructive.restdemo.exception;
+package com.restapi.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,5 +19,16 @@ public class CloudVendorExceptionHandler {
         );
 
         return new ResponseEntity<>(cloudVendorException, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(value = {org.springframework.web.bind.MethodArgumentNotValidException.class})
+    public ResponseEntity<Object> handleValidationExceptions(
+            org.springframework.web.bind.MethodArgumentNotValidException ex) {
+        java.util.Map<String, String> errors = new java.util.HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((org.springframework.validation.FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }

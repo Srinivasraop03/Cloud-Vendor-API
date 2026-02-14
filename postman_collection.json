@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "b7336528-9128-4e31-8631-097365615822",
+		"name": "Cloud Vendor API",
+		"description": "Postman collection for the Cloud Vendor Spring Boot Coding Interview.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Create Cloud Vendor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"vendorId\": \"C1\",\n  \"vendorName\": \"Amazon\",\n  \"vendorAddress\": \"USA\",\n  \"vendorPhoneNumber\": \"1234567890\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cloudvendor/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cloudvendor",
+						""
+					]
+				}
+			}
+		},
+		{
+			"name": "2. Get All Vendors (Paginated)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cloudvendor/?page=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cloudvendor",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "3. Filter Vendor by Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cloudvendor/?vendorName=Amazon&page=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cloudvendor",
+						""
+					],
+					"query": [
+						{
+							"key": "vendorName",
+							"value": "Amazon"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "4. Get Single Vendor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cloudvendor/C1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cloudvendor",
+						"C1"
+					]
+				}
+			}
+		},
+		{
+			"name": "5. Update Vendor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"vendorId\": \"C1\",\n  \"vendorName\": \"Amazon Cloud\",\n  \"vendorAddress\": \"USA - Seattle\",\n  \"vendorPhoneNumber\": \"0987654321\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cloudvendor/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cloudvendor",
+						""
+					]
+				}
+			}
+		},
+		{
+			"name": "6. Delete Vendor",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cloudvendor/C1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cloudvendor",
+						"C1"
+					]
+				}
+			}
+		}
+	]
+}

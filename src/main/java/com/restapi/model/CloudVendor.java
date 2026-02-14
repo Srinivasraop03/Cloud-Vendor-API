@@ -1,4 +1,4 @@
-package com.thinkconstructive.restdemo.model;
+package com.restapi.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="cloud_vendor_info")
@@ -15,8 +16,11 @@ public class CloudVendor
     @Id
     @ApiModelProperty(notes="This is a Cloud Vendor Id. It shall be unique.")
     private String vendorId;
+    @NotBlank(message = "Vendor Name is mandatory")
     private String vendorName;
+    @NotBlank(message = "Vendor Address is mandatory")
     private String vendorAddress;
+    @NotBlank(message = "Phone Number is mandatory")
     private String vendorPhoneNumber;
 
     public CloudVendor() {

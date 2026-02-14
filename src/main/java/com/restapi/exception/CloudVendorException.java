@@ -1,4 +1,4 @@
-package com.thinkconstructive.restdemo.exception;
+package com.restapi.exception;
 
 import org.springframework.http.HttpStatus;
 

@@ -1,9 +1,11 @@
-package com.thinkconstructive.restdemo.service.impl;
+package com.restapi.service.impl;
 
-import com.thinkconstructive.restdemo.exception.CloudVendorNotFoundException;
-import com.thinkconstructive.restdemo.model.CloudVendor;
-import com.thinkconstructive.restdemo.repository.CloudVendorRepository;
-import com.thinkconstructive.restdemo.service.CloudVendorService;
+import com.restapi.exception.CloudVendorNotFoundException;
+import com.restapi.model.CloudVendor;
+import com.restapi.repository.CloudVendorRepository;
+import com.restapi.service.CloudVendorService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,24 +20,21 @@ public class CloudVendorServiceImpl implements CloudVendorService {
     }
 
     @Override
-    public String createCloudVendor(CloudVendor cloudVendor) {
+    public CloudVendor createCloudVendor(CloudVendor cloudVendor) {
         // More Business Logic
-        cloudVendorRepository.save(cloudVendor);
-        return "Success";
+        return cloudVendorRepository.save(cloudVendor);
     }
 
     @Override
-    public String updateCloudVendor(CloudVendor cloudVendor) {
+    public CloudVendor updateCloudVendor(CloudVendor cloudVendor) {
         // More Business Logic
-        cloudVendorRepository.save(cloudVendor);
-        return "Success";
+        return cloudVendorRepository.save(cloudVendor);
     }
 
     @Override
-    public String deleteCloudVendor(String cloudVendorId) {
+    public void deleteCloudVendor(String cloudVendorId) {
         // More Business Logic
         cloudVendorRepository.deleteById(cloudVendorId);
-        return "Success";
     }
 
     @Override
@@ -56,5 +55,15 @@ public class CloudVendorServiceImpl implements CloudVendorService {
     public List<CloudVendor> getByVendorName(String vendorName)
     {
         return cloudVendorRepository.findByVendorName(vendorName);
+    }
+
+    @Override
+    public Page<CloudVendor> getAllCloudVendors(int page, int size) {
+        return cloudVendorRepository.findAll(PageRequest.of(page, size));
+    }
+
+    @Override
+    public Page<CloudVendor> getByVendorName(String vendorName, int page, int size) {
+        return cloudVendorRepository.findByVendorName(vendorName, PageRequest.of(page, size));
     }
 }

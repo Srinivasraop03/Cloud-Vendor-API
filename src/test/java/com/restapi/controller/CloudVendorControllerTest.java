@@ -1,10 +1,10 @@
-package com.thinkconstructive.restdemo.controller;
+package com.restapi.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.thinkconstructive.restdemo.model.CloudVendor;
-import com.thinkconstructive.restdemo.service.CloudVendorService;
+import com.restapi.model.CloudVendor;
+import com.restapi.service.CloudVendorService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,7 +57,10 @@ class CloudVendorControllerTest {
 
     @Test
     void getAllCloudVendorDetails() throws  Exception {
-        when(cloudVendorService.getAllCloudVendors()).thenReturn(cloudVendorList);
+        // Mock Page return
+        org.springframework.data.domain.Page<CloudVendor> cloudVendorPage = new org.springframework.data.domain.PageImpl<>(cloudVendorList);
+        
+        when(cloudVendorService.getAllCloudVendors(0, 10)).thenReturn(cloudVendorPage);
         this.mockMvc.perform(get("/cloudvendor"))
                 .andDo(print()).andExpect(status().isOk());
     }
@@ -69,11 +72,11 @@ class CloudVendorControllerTest {
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         String requestJson=ow.writeValueAsString(cloudVendorOne);
 
-        when(cloudVendorService.createCloudVendor(cloudVendorOne)).thenReturn("Success");
+        when(cloudVendorService.createCloudVendor(cloudVendorOne)).thenReturn(cloudVendorOne);
         this.mockMvc.perform(post("/cloudvendor")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
-                .andDo(print()).andExpect(status().isOk());
+                .andDo(print()).andExpect(status().isCreated());
     }
 
     @Test
@@ -84,7 +87,7 @@ class CloudVendorControllerTest {
         String requestJson=ow.writeValueAsString(cloudVendorOne);
 
         when(cloudVendorService.updateCloudVendor(cloudVendorOne))
-                .thenReturn("Cloud Vendor Updated Successfully");
+                .thenReturn(cloudVendorOne);
         this.mockMvc.perform(put("/cloudvendor")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
@@ -93,8 +96,9 @@ class CloudVendorControllerTest {
 
     @Test
     void deleteCloudVendorDetails() throws Exception {
-        when(cloudVendorService.deleteCloudVendor("1"))
-                .thenReturn("Cloud Vendor Deleted Successfully");
+        // void method mocking
+        // Create a mock for the service (already done by @MockBean)
+        // No return value needed for void
         this.mockMvc.perform(delete("/cloudvendor/" + "1"))
                 .andDo(print()).andExpect(status().isOk());
 

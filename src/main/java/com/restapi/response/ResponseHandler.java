@@ -1,4 +1,4 @@
-package com.thinkconstructive.restdemo.response;
+package com.restapi.response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +12,7 @@ public class ResponseHandler {
     )
     {
         Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", new java.util.Date());
         response.put("message", message);
         response.put("httpStatus", httpStatus);
         response.put("data", responseObject);
