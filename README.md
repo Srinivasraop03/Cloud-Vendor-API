@@ -121,5 +121,5 @@ This consistency is vital for professional API clients.
 4.  **Swagger UI**: `http://localhost:8080/swagger-ui/`
 5.  **H2 Database Console**: `http://localhost:8080/h2-console`
     *   **JDBC URL**: `jdbc:h2:mem:cloudvendordb`
-    *   **User**: `sa`
+    *   **User**: `admin`
     *   **Password**: `password`
