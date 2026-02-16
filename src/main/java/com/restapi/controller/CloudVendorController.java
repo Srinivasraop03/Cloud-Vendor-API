@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/cloudvendor")
+@CrossOrigin(origins = "*")
 @Tag(name = "Cloud Vendor API", description = "Endpoints for managing cloud vendors")
 public class CloudVendorController {
     private final CloudVendorService cloudVendorService;
